@@ -7,5 +7,16 @@
 - d’afficher toutes les formations contenant un mot clé
 - d'afficher toutes les formations en présentiel ou distanciel
 
-## Dans un second temps l'application permettra:
+## Dans un second temps l'application permettra en plus de faire:
+
+### Pour les utilisateurs non connectés :
+
+- de se connecter
+- de s'inscrire
+
+### Pour les utilisateurs connectés :
+
+-passer commande d'une formation
+
+
 
