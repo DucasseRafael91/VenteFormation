@@ -18,6 +18,20 @@ class Categorie {
     -string nom
 }
 
+class Utilisateur {
+    -int id
+    -string identifiant
+    -string mot_de_passe
+}
+
+class Client {
+    -int id
+    -string nom
+    -string prenom
+    -string adresse
+    -string telephone
+}
+
 Categorie "1" --> "0..n" Formation : catégorise
 TypeFormation "0..n" -- "0..n" Formation : est de type
 
