@@ -1,0 +1,76 @@
+@startuml Goncourt
+
+class Livre
+{
+    -int ISBN
+    -string titre
+    -text resume
+    -date date_parution
+    -integer nombre_pages
+    -string prix_editeur
+}
+
+class Auteur
+{
+    -integer id
+    -string nom
+    -string prenom
+    -text biographie
+}
+
+class Editeur
+{
+    -integer id
+    -string nom
+}
+
+class Personnage
+{
+    -integer id
+    -string nom
+}
+
+class Jury
+{
+    -integer id
+    -string identifiant
+    -string mot_de_passe
+    -boolean est_president
+    -string nom
+    -string prenom
+}
+
+class TourVote
+{
+    -integer id
+    -string nom
+}
+
+class Vote
+{
+}
+
+class Selection
+{
+    -integer id
+    -string nom
+}
+
+class SelectionLivre
+{
+    -integer id
+    -string nom
+    -integer nombre_votes
+}
+
+Auteur "1" --> "0..n" Livre : ecrit >
+Editeur "1" --> "0..n" Livre : publie >
+Livre "1" --> "0..n" Personnage : comporte >
+Livre "1" --> "0..n" Vote : reçoit >
+
+Jury "1" --> "0..n" Vote : effectue >
+Vote "1" --> "1" TourVote : pour >
+Selection "1" --> "1..n" SelectionLivre : contient >
+SelectionLivre "1..n" --> "1" Livre : concerne >
+
+@enduml
