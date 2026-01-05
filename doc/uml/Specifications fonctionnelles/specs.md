@@ -16,7 +16,4 @@
 
 ### Pour les utilisateurs connectés :
 
--passer commande d'une formation
-
-
-
+- passer commande d'une formation
