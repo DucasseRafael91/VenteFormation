@@ -7,6 +7,14 @@ participant "Base de données" as BDD
 
 activate Interface
 
+Interface -> BDD : Requête pour obtenir tous les clients de l'utilisateur
+activate BDD
+BDD --> Interface : Retour des clients
+deactivate BDD
+
+Interface -> Utilisateur : Affichage des clients
+Utilisateur -> Interface : Choix du client
+
 Interface -> BDD : Requête pour obtenir toutes les formations
 activate BDD
 BDD --> Interface : Retour des formations
@@ -19,14 +27,6 @@ loop Pour chaque formation sélectionnée par l'utilisateur
     Interface -> Utilisateur : Affichage de la commande en cours
 end
 deactivate Utilisateur
-
-Interface -> BDD : Requête pour obtenir tous les clients de l'utilisateur
-activate BDD
-BDD --> Interface : Retour des clients
-deactivate BDD
-
-Interface -> Utilisateur : Affichage des clients
-Utilisateur -> Interface : Choix du client
 
 Interface -> BDD : Requête de création d'une commande
 activate BDD
