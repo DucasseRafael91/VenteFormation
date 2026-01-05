@@ -1,4 +1,4 @@
-package com.venteformation;
+package com.venteformation.Entities;
 
 public class Formation {
 
@@ -7,11 +7,11 @@ public class Formation {
     private String description;
     private Integer days_amount;
     private Double price;
-    private Category category;
+    private com.venteformation.Category category;
 
 
     // Constructeur
-    public Formation(String name, String description, Integer days_amount, Double price, Category category) {
+    public Formation(String name, String description, Integer days_amount, Double price, com.venteformation.Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,7 +42,7 @@ public class Formation {
         return price;
     }
 
-    public Category getCategory() {
+    public com.venteformation.Category getCategory() {
         return category;
     }
 

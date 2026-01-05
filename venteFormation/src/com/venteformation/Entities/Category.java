@@ -1,4 +1,4 @@
-package com.venteformation;
+package com.venteformation.Entities;
 
 public class Category {
 
