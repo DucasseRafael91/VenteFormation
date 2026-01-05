@@ -28,6 +28,7 @@ class Client {
     -int id
     -string nom
     -string prenom
+    -string email
     -string adresse
     -string telephone
 }
