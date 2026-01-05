@@ -1,20 +1,11 @@
-### Pour tous les utilisateurs, l'application permet :
+## Dans un premier temps l'application permettra:
 
-#### Afficher les livres
+### Pour tous les utilisateurs :
 
-- afficher les informations des livres triés par selection  
+- d’afficher toutes les formations disponibles
+- d’afficher toutes les formations disponibles par catégorie 
+- d’afficher toutes les formations contenant un mot clé
+- d'afficher toutes les formations en présentiel ou distanciel
 
+## Dans un second temps l'application permettra:
 
-### Pour le jury, l'application permet :
-
-- de se connecter avec un identifiant et un mot de passe
-- afficher les informations des livres triés par selection  
-- voter pour les deuxième et troisième sélections, ainsi que pour le lauréat
-
-### Pour le président du jury, l'application permet :
-
-- de se connecter avec un identifiant et un mot de passe
-- afficher les informations des livres triés par selection  
-- voter pour les deuxième et troisième sélections, ainsi que pour le lauréat
-- d’indiquer les livres faisant partie de la deuxième et troisième sélection
-- indiquer le nombre de votes obtenus par chaque livre présent au dernier tour de scrutin
