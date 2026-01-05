@@ -1,22 +1,24 @@
 @startuml VenteFormation
 
-class Formation
-{
+class Formation {
     -int id
     -string nom
     -text description
     -int duree_jours
-    -boolean format
     -double prix
 }
 
-class Categorie
-{
-    -integer id
+class TypeFormation {
+    -int id
     -string nom
 }
 
-Categorie "1" --> "0..n" Formation : posséde >
+class Categorie {
+    -int id
+    -string nom
+}
 
+Categorie "1" --> "0..n" Formation : catégorise
+TypeFormation "0..n" -- "0..n" Formation : est de type
 
 @enduml
