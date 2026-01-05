@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 05 jan. 2026 à 10:44
+-- Généré le : lun. 05 jan. 2026 à 12:04
 -- Version du serveur : 8.4.7
 -- Version de PHP : 8.3.28
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `v_categorie` (
                                              `c_id` int NOT NULL AUTO_INCREMENT,
                                              `c_nom` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
     PRIMARY KEY (`c_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,9 @@ CREATE TABLE IF NOT EXISTS `v_client` (
     `c_email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
     `c_adresse` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
     `c_telephone` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-    PRIMARY KEY (`c_id`)
+    `c_fk_utilisateur` int NOT NULL,
+    PRIMARY KEY (`c_id`),
+    KEY `c_fk_utilisateur` (`c_fk_utilisateur`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -76,10 +78,8 @@ DROP TABLE IF EXISTS `v_commande`;
 CREATE TABLE IF NOT EXISTS `v_commande` (
                                             `c_id` int NOT NULL AUTO_INCREMENT,
                                             `c_date` datetime NOT NULL,
-                                            `c_fk_utilisateur` int NOT NULL,
                                             `c_fk_client` int NOT NULL,
                                             PRIMARY KEY (`c_id`),
-    KEY `v_fk_utilisateur` (`c_fk_utilisateur`),
     KEY `c_fk_client` (`c_fk_client`)
     ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `v_type_formation` (
                                                   `t_id` int NOT NULL AUTO_INCREMENT,
                                                   `t_nom` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
     PRIMARY KEY (`t_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `v_utilisateur` (
                                                `u_identifant` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
     `u_mot_de_passe` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
     PRIMARY KEY (`u_id`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Contraintes pour les tables déchargées
@@ -155,11 +155,16 @@ ALTER TABLE `est_de_type`
   ADD CONSTRAINT `est_de_type_ibfk_2` FOREIGN KEY (`e_fk_type_formation`) REFERENCES `v_type_formation` (`t_id`) ON DELETE CASCADE;
 
 --
+-- Contraintes pour la table `v_client`
+--
+ALTER TABLE `v_client`
+    ADD CONSTRAINT `v_client_ibfk_1` FOREIGN KEY (`c_fk_utilisateur`) REFERENCES `v_utilisateur` (`u_id`) ON DELETE CASCADE;
+
+--
 -- Contraintes pour la table `v_commande`
 --
 ALTER TABLE `v_commande`
-    ADD CONSTRAINT `v_commande_ibfk_1` FOREIGN KEY (`c_fk_utilisateur`) REFERENCES `v_utilisateur` (`u_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `v_commande_ibfk_2` FOREIGN KEY (`c_fk_client`) REFERENCES `v_client` (`c_id`) ON DELETE CASCADE;
+    ADD CONSTRAINT `v_commande_ibfk_2` FOREIGN KEY (`c_fk_client`) REFERENCES `v_client` (`c_id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `v_formation`
