@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class UserDao implements Dao<User> {
 
     private static final String URL = "jdbc:mariadb://localhost:3307/formation";
-    private static final String LOGIN = "formation";
+    private static final String LOGIN = "root";
     private static final String PASSWORD = "";
 
     @Override
