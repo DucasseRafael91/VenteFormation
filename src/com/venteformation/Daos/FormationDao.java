@@ -37,20 +37,23 @@ public class FormationDao implements Dao<Formation> {
     public ArrayList<Formation> findAll() {
         ArrayList<Formation> formations = new ArrayList<>();
 
-        String sql = "SELECT * FROM v_formation";
+        String sql = "SELECT f_nom,f_description,duree_jours,prix,c_nom\n" +
+                "FROM v_formation\n" +
+                "INNER JOIN v_categorie\n" +
+                "ON v_formation.f_fk_categorie = v_categorie.c_id\n" +
+                "ORDER BY c_nom;";
 
         try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                int idUser = resultSet.getInt(1);
-                String name = resultSet.getString(2);
-                String description = resultSet.getString(3);
-                Integer days_amount = resultSet.getInt(4);
-                Double price = resultSet.getDouble(5);
+                String name = resultSet.getString(1);
+                String description = resultSet.getString(2);
+                Integer days_amount = resultSet.getInt(3);
+                Double price = resultSet.getDouble(4);
 
-                Category category = new Category("Anglais");
+                Category category = new Category(resultSet.getString(5));
 
                 formations.add(new Formation(name, description, days_amount, price, category));
             }
