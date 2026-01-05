@@ -1,7 +1,7 @@
 package com.venteformation;
 
-import com.venteformation.Daos.UserDao;
-import com.venteformation.Entities.User;
+import com.venteformation.Daos.FormationDao;
+import com.venteformation.Entities.Formation;
 
 import java.util.ArrayList;
 
@@ -9,11 +9,11 @@ public class SaleFormation {
 
     public static void main(String[] args) {
 
-        UserDao dao = new UserDao();
-        ArrayList<User> users = dao.findAll();
+        FormationDao dao = new FormationDao();
+        ArrayList<Formation> formations = dao.findAll();
 
-        for (User user : users) {
-            System.out.println(user.getLogin());
+        for (Formation formation : formations) {
+            System.out.println(formation);
         }
     }
 }
