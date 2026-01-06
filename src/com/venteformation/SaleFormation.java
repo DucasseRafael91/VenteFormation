@@ -1,6 +1,8 @@
 package com.venteformation;
 
+import com.venteformation.Daos.CategoryDao;
 import com.venteformation.Daos.FormationDao;
+import com.venteformation.Entities.Category;
 import com.venteformation.Entities.Formation;
 
 import java.util.ArrayList;
@@ -10,7 +12,8 @@ public class SaleFormation {
 
     public static void main(String[] args) {
 
-        FormationDao dao = new FormationDao();
+        FormationDao formationDao = new FormationDao();
+        CategoryDao categoryDao = new CategoryDao();
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -43,14 +46,39 @@ public class SaleFormation {
                     switch (menuChoice) {
                         case 1:
                             System.out.println("Afficher toutes les formations...");
-                            ArrayList<Formation> formations = dao.findAll();
+                            ArrayList<Formation> formations = formationDao.findAll();
                             for (Formation formation : formations) {
                                 System.out.println(formation);
                             }
                             break;
                         case 2:
                             System.out.println("Afficher les formations par catégorie...");
-                            // TODO: filtrer par catégorie
+
+                            ArrayList<Category> categories = categoryDao.findAll();
+
+                            // Afficher toutes les catégories avec un numéro
+                            for (int i = 0; i < categories.size(); i++) {
+                                System.out.println((i + 1) + ". " + categories.get(i).getName());
+                            }
+
+                            System.out.print("Choisissez une catégorie (numéro) : ");
+                            int categoryChoice = scanner.nextInt();
+                            scanner.nextLine(); // consommer le retour à la ligne
+
+                            // Vérifier que le choix est valide
+                            if (categoryChoice < 1 || categoryChoice > categories.size()) {
+                                System.out.println("Choix de catégorie invalide.");
+                                break;
+                            }
+
+                            Category selectedCategory = categories.get(categoryChoice - 1);
+                            ArrayList<Formation> formationsByCategory = formationDao.findByCategory(selectedCategory);
+
+                            System.out.println("\nFormations de la catégorie " + selectedCategory.getName() + " :");
+                            for (Formation formation : formationsByCategory) {
+                                System.out.println(formation);
+                            }
+
                             break;
                         case 3:
                             System.out.println("Rechercher les formations par mot clé...");
