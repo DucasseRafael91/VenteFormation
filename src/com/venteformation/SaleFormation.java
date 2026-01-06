@@ -2,8 +2,10 @@ package com.venteformation;
 
 import com.venteformation.Daos.CategoryDao;
 import com.venteformation.Daos.FormationDao;
+import com.venteformation.Daos.FormationTypeDao;
 import com.venteformation.Entities.Category;
 import com.venteformation.Entities.Formation;
+import com.venteformation.Entities.Formation_type;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,6 +16,7 @@ public class SaleFormation {
 
         FormationDao formationDao = new FormationDao();
         CategoryDao categoryDao = new CategoryDao();
+        FormationTypeDao formationTypeDao = new FormationTypeDao();
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -35,9 +38,8 @@ public class SaleFormation {
                     System.out.println("1. Afficher toutes les formations");
                     System.out.println("2. Afficher les formations par catégorie");
                     System.out.println("3. Rechercher les formations par mot clé");
-                    System.out.println("4. Afficher les formations en présentiel");
-                    System.out.println("5. Afficher les formations en distanciel");
-                    System.out.println("6. Retour au menu précédent");
+                    System.out.println("4. Afficher les formations selon leur type");
+                    System.out.println("5. Retour au menu précédent");
                     System.out.print("Votre choix : ");
 
                     int menuChoice = scanner.nextInt();
@@ -97,14 +99,15 @@ public class SaleFormation {
                             }
                             break;
                         case 4:
-                            System.out.println("Afficher les formations en présentiel...");
-                            // TODO: filtrer par présentiel
+                            System.out.println("Afficher les formations selon leur type");
+                            ArrayList<Formation_type> types = formationTypeDao.findAll();
+
+                            // Afficher toutes les catégories avec un numéro
+                            for (int i = 0; i < types.size(); i++) {
+                                System.out.println((i + 1) + ". " + types.get(i).getName());
+                            }
                             break;
                         case 5:
-                            System.out.println("Afficher les formations en distanciel...");
-                            // TODO: filtrer par distanciel
-                            break;
-                        case 6:
                             exitMenu = true; // revenir au menu principal
                             break;
                         default:
