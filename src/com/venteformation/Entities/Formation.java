@@ -23,15 +23,13 @@ public class Formation {
 
     @Override
     public String toString() {
-        return "Formation{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", days_amount=" + days_amount +
-                ", price=" + price +
-                ", category=" + category +
-                '}';
+        return
+                "Nom: " + name +
+                " | Durée: " + days_amount + " jours" +
+                " | Prix: " + price + " €" +
+                " | Catégorie: " + category;
     }
+
 
 
     // Getters
