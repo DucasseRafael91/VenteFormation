@@ -98,4 +98,38 @@ public class FormationDao implements Dao<Formation> {
         return formations;
     }
 
+    public ArrayList<Formation> findByKeyword(String keyword) {
+        ArrayList<Formation> formations = new ArrayList<>();
+
+        String sql =
+                "SELECT f.f_nom, f.f_description, f.duree_jours, f.prix, c.c_nom " +
+                        "FROM v_formation f " +
+                        "INNER JOIN v_categorie c ON f.f_fk_categorie = c.c_id " +
+                        "WHERE f.f_nom LIKE ?";
+
+        try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + keyword + "%"); // Le % permet de chercher n'importe où dans le nom
+
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                String name = resultSet.getString("f_nom");
+                String description = resultSet.getString("f_description");
+                int daysAmount = resultSet.getInt("duree_jours");
+                double price = resultSet.getDouble("prix");
+                Category category = new Category(resultSet.getString("c_nom"));
+
+                formations.add(new Formation(name, description, daysAmount, price, category));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return formations;
+    }
+
+
 }
