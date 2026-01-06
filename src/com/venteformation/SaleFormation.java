@@ -13,22 +13,23 @@ public class SaleFormation {
         FormationDao dao = new FormationDao();
         Scanner scanner = new Scanner(System.in);
 
-        while (true) { // boucle infinie
-            System.out.println("\n--- Menu ---");
-            System.out.println("1 : Afficher les formations");
-            System.out.println("2 : Quitter");
+        while (true) { 
+            System.out.println("Voulez vous vous connectez ? (o/n)");
             System.out.print("Votre choix : ");
 
-            int choix = scanner.nextInt();
+            String choix = scanner.next();
 
-            if (choix == 1) {
+            if (choix == "o") {
+                System.out.println("Au revoir !");
+                break; 
+
+            } else if (choix == "n") {
+
                 ArrayList<Formation> formations = dao.findAll();
                 for (Formation formation : formations) {
                     System.out.println(formation);
                 }
-            } else if (choix == 2) {
-                System.out.println("Au revoir !");
-                break; // quitte la boucle et le programme
+
             } else {
                 System.out.println("Choix invalide, veuillez réessayer.");
             }
