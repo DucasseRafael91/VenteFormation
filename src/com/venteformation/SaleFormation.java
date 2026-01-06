@@ -82,7 +82,19 @@ public class SaleFormation {
                             break;
                         case 3:
                             System.out.println("Rechercher les formations par mot clé...");
-                            // TODO: filtrer par mot clé
+                            System.out.print("Entrez un mot clé : ");
+                            String keyword = scanner.nextLine();
+
+                            ArrayList<Formation> formationsByKeyword = formationDao.findByKeyword(keyword);
+
+                            if (formationsByKeyword.isEmpty()) {
+                                System.out.println("Aucune formation trouvée pour le mot clé \"" + keyword + "\".");
+                            } else {
+                                System.out.println("\nFormations contenant le mot clé \"" + keyword + "\" :");
+                                for (Formation formation : formationsByKeyword) {
+                                    System.out.println(formation);
+                                }
+                            }
                             break;
                         case 4:
                             System.out.println("Afficher les formations en présentiel...");
