@@ -2,8 +2,14 @@ package com.venteformation.daos;
 
 import com.venteformation.Entities.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.PreparedStatement;
+
 
 public class UserDao implements Dao<User> {
 
@@ -11,8 +17,14 @@ public class UserDao implements Dao<User> {
     private static final String LOGIN = "root";
     private static final String PASSWORD = "";
 
+
+    /**
+     * Méthode pour créer un utilisateur
+     * dans la base de données.
+     * @param user : utilisateur
+     */
     @Override
-    public void create(User user) {
+    public void create(final User user) {
         String sql = "INSERT INTO v_utilisateur (u_identifiant, u_mot_de_passe) VALUES (?, ?)";
 
         try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -33,21 +45,32 @@ public class UserDao implements Dao<User> {
 
 
     @Override
-    public void update(User user) {
+    public void update(final User user) {
         // À implémenter plus tard
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(final int id) {
         // À implémenter plus tard
     }
 
+
+    /**
+     * Méthode pour trouver l'user avec l'id
+     * dans la base de données.
+     * @param id :id
+     */
     @Override
-    public User findById(int id) {
+    public User findById(final int id) {
         // À implémenter plus tard
         return null;
     }
 
+
+    /**
+     * Méthode pour trouver tous les utilisateurs
+     * dans la base de données.
+     */
     @Override
     public ArrayList<User> findAll() {
         ArrayList<User> users = new ArrayList<>();
@@ -59,8 +82,8 @@ public class UserDao implements Dao<User> {
              ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                String login = resultSet.getString(2);
-                String password = resultSet.getString(3);
+                String login = resultSet.getString("u_identifiant");
+                String password = resultSet.getString("u_mot_de_passe");
 
                 users.add(new User(login, password));
             }
@@ -72,7 +95,12 @@ public class UserDao implements Dao<User> {
         return users;
     }
 
-    public User connexion(User user) {
+    /**
+     * Méthode pour se connecter.
+     * @param user : utilisateur
+     * @return : user si correspond
+     */
+    public User connexion(final User user) {
 
         String sql = """
         SELECT u_identifiant, u_mot_de_passe
