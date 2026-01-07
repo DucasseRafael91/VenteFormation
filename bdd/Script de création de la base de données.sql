@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `v_type_formation` (
 DROP TABLE IF EXISTS `v_utilisateur`;
 CREATE TABLE IF NOT EXISTS `v_utilisateur` (
                                                `u_id` int NOT NULL AUTO_INCREMENT,
-                                               `u_identifant` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                               `u_identifiant` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
     `u_mot_de_passe` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
     PRIMARY KEY (`u_id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

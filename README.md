@@ -24,17 +24,12 @@ Cette application permet aux utilisateurs de consulter et d’acheter des format
 - Faciliter le processus d’achat et de gestion des commandes.
 - Offrir une expérience utilisateur fluide, que ce soit pour les visiteurs ou les clients enregistrés.
 
-## Questions à clarifier avec le client
-1. Quelles méthodes de paiement doivent être intégrées ?
-2. Y aura-t-il un système de confirmation ou de facturation par email après commande ?
-3. Faut-il gérer un stock limité de places par formation ?
-4. Doit-on prévoir un compte administrateur pour gérer les formations et commandes ?
-5. Y a-t-il des préférences pour la technologie (web, mobile, framework spécifique) ?
-6. Faut-il des fonctionnalités de tri ou de notation des formations ?
 
 ## Installation et exécution
 *(À compléter selon la technologie choisie)*
 
 1. Cloner le dépôt :
    ```bash
-   git clone <URL_DU_DEPOT>
+   git clone https://github.com/DucasseRafael91/VenteFormation
+
+2. Utiliser le fichier SQL Script de création de la base de données.sql pour créer la base de données
