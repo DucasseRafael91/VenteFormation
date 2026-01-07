@@ -4,12 +4,11 @@ public class Category {
 
 
     private int id;
-    private String name;
+    private final String name;
 
 
     // Constructeur
     public Category(String name) {
-        this.id = id;
         this.name = name;
     }
 
@@ -35,7 +34,4 @@ public class Category {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }
