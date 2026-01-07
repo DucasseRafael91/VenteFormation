@@ -1,15 +1,18 @@
 package com.venteformation.Entities;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Order {
 
     private int id;
-    private Date date;
+    private LocalDateTime date;
+    private Client client;
 
 
     // Constructeur
-    public Order(Date date) {
+    public Order(LocalDateTime date, Client client) {
+        this.client = client;
         this.id = id;
         this.date = date;
     }
@@ -19,7 +22,7 @@ public class Order {
         return id;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -28,7 +31,16 @@ public class Order {
         this.id = id;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
 }
