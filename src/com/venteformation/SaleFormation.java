@@ -165,7 +165,7 @@ public class SaleFormation {
             System.out.println(formation);
         }
         Order order = new Order(LocalDateTime.now(),selectedClient);
-        orderDao.create(order);
+        orderDao.create(order, selectedFormations);
     }
 
 
