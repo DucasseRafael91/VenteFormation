@@ -27,7 +27,7 @@ public class SaleFormation {
             String choice = scanner.next();
 
             if (choice.equals("o")) {
-                System.out.println("Au revoir !");
+                printConnectedMenu(scanner);
                 break;
 
             } else if (choice.equals("n")) {
@@ -60,6 +60,32 @@ public class SaleFormation {
                 case 3 -> printFormationsByKeyword(scanner);
                 case 4 -> printFormationsByType(scanner);
                 case 5 -> exitMenu = true;
+                default -> System.out.println("Choix invalide, veuillez réessayer.");
+            }
+        }
+    }
+
+    private static void printConnectedMenu(Scanner scanner) {
+        boolean exitMenu = false;
+
+        while (!exitMenu) {
+            System.out.println("\n=== Menu Connecté ===");
+            System.out.println("1. Passer commande");
+            System.out.println("2. Afficher toutes les formations");
+            System.out.println("3. Afficher les formations par catégorie");
+            System.out.println("4. Rechercher les formations par mot clé");
+            System.out.println("5. Afficher les formations selon leur type");
+            System.out.println("6. Retour au menu précédent");
+            System.out.print("Votre choix : ");
+            int menuChoice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (menuChoice) {
+                case 2 -> printAllFormations();
+                case 3 -> printFormationsByCategory(scanner);
+                case 4 -> printFormationsByKeyword(scanner);
+                case 5 -> printFormationsByType(scanner);
+                case 6 -> exitMenu = true;
                 default -> System.out.println("Choix invalide, veuillez réessayer.");
             }
         }
