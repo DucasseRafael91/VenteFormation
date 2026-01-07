@@ -3,8 +3,14 @@ package com.venteformation.daos;
 
 import com.venteformation.Entities.Formation;
 import com.venteformation.Entities.Order;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.PreparedStatement;
+
 
 public class OrderDao implements Dao<Order> {
 
@@ -13,7 +19,14 @@ public class OrderDao implements Dao<Order> {
     private static final String PASSWORD = "";
 
 
-    public void create(Order order, ArrayList<Formation> formations) {
+
+    /**
+     * Méthode pour créer des commandes
+     * dans la base de données.
+     * @param order : commande à insérer dans la BDD
+     * @param formations : liste des formations commandées
+     */
+    public void create(final Order order, final ArrayList<Formation> formations) {
         String sqlCommande = "INSERT INTO v_commande (c_date, c_fk_client) VALUES (CURRENT_TIMESTAMP, ?)";
         String sqlLigne = "INSERT INTO v_ligne_commande (l_fk_formation, l_fk_commande) VALUES (?, ?)";
         String sqlSelectFormation = "SELECT f_id FROM v_formation WHERE f_nom = ?";
@@ -49,7 +62,9 @@ public class OrderDao implements Dao<Order> {
                             psLigne.setInt(2, order.getId());
                             psLigne.executeUpdate();
                         } else {
-                            System.out.println("La formation '" + f.getName() + "' n'existe pas en base !");
+                            System.out.println("La formation '"
+                                    + f.getName()
+                                    + "' n'existe pas en base !");
                         }
                     }
                 }
@@ -64,26 +79,35 @@ public class OrderDao implements Dao<Order> {
 
 
     @Override
-    public void create(Order obj) {
+    public void create(final Order obj) {
         //à implémenter plus tard
     }
 
     @Override
-    public void update(Order order) {
+    public void update(final Order order) {
         // À implémenter plus tard
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(final int id) {
         // À implémenter plus tard
     }
 
+    /**
+     * Méthode pour trouver les commandes avec l'id
+     * dans la base de données.
+     * @param id : id
+     */
     @Override
-    public Order findById(int id) {
+    public Order findById(final int id) {
         // À implémenter plus tard
         return null;
     }
 
+    /**
+     * Méthode pour trouver toutes les commandes
+     * dans la base de données.
+     */
     @Override
     public ArrayList<Order> findAll() {
         return new ArrayList<>();
