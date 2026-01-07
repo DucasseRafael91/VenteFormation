@@ -3,28 +3,28 @@ package com.venteformation.Entities;
 public class Client {
 
     private int id;
-    private String lastName;
-    private String firstName;
-    private String mail;
-    private String address;
-    private String phone_number;
-    private User User;
+    private final String lastName;
+    private final String firstName;
+    private final String mail;
+    private final String address;
+    private final String phoneNumber;
+    private final User user;
 
 
     // Constructeur
-    public Client(Integer id,String lastName, String firstName, String mail, String address, String phone_number, User User) {
+    public Client(Integer id, String lastName, String firstName, String mail, String address, String phoneNumber, User user) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.mail = mail;
         this.address = address;
-        this.phone_number = phone_number;
-        this.User = User;
+        this.phoneNumber = phoneNumber;
+        this.user = user;
     }
 
     @Override
     public String toString() {
-        return lastName + " " + firstName + " | Email: " + mail + " | Téléphone: " + phone_number + " | Adresse: " + address;
+        return lastName + " " + firstName + " | Email: " + mail + " | Téléphone: " + phoneNumber + " | Adresse: " + address;
     }
 
 
@@ -33,56 +33,10 @@ public class Client {
         return id;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPhoneNumber() {
-        return phone_number;
-    }
-
-    public User getUser() {
-        return User;
-    }
 
     // Setters
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setPhoneNumber(String phone_number) {
-        this.phone_number = phone_number;
-    }
-
-    public void setUser(User user) {
-        this.User = user;
-    }
 }
