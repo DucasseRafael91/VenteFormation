@@ -1,13 +1,7 @@
 package com.venteformation;
 
-import com.venteformation.daos.CategoryDao;
-import com.venteformation.daos.FormationDao;
-import com.venteformation.daos.FormationTypeDao;
-import com.venteformation.daos.UserDao;
-import com.venteformation.Entities.Category;
-import com.venteformation.Entities.Formation;
-import com.venteformation.Entities.Formation_type;
-import com.venteformation.Entities.User;
+import com.venteformation.daos.*;
+import com.venteformation.Entities.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,10 +12,11 @@ public class SaleFormation {
     private static final CategoryDao categoryDao = new CategoryDao();
     private static final FormationTypeDao formationTypeDao = new FormationTypeDao();
     private static final UserDao userDao = new UserDao();
+    private static final ClientDao clientDao = new ClientDao();
 
     public static void main(String[] ignoredArgs) {
-
         Scanner scanner = new Scanner(System.in);
+        User connectedUser = null;
 
         while (true) {
             System.out.println("Voulez vous vous connectez ? (o/n)");
@@ -30,8 +25,9 @@ public class SaleFormation {
             String choice = scanner.next();
 
             if (choice.equals("o")) {
-                if (authenticateUser(scanner)) {
-                    printConnectedMenu(scanner);
+                connectedUser = authenticateUser(scanner);
+                if (connectedUser != null) {
+                    printConnectedMenu(scanner, connectedUser);
                     break;
                 }
             } else if (choice.equals("n")) {
@@ -44,7 +40,7 @@ public class SaleFormation {
         scanner.close();
     }
 
-    private static boolean authenticateUser(Scanner scanner) {
+    private static User authenticateUser(Scanner scanner) {
         System.out.print("Login : ");
         String login = scanner.next();
 
@@ -56,11 +52,11 @@ public class SaleFormation {
 
         if (connectedUser != null) {
             System.out.println("Connexion réussie.");
-            return true;
+            return connectedUser;
         }
 
         System.out.println("Login ou mot de passe incorrect.");
-        return false;
+        return null;
     }
 
     private static void printUnconnectedMenu(Scanner scanner) {
@@ -89,7 +85,7 @@ public class SaleFormation {
         }
     }
 
-    private static void printConnectedMenu(Scanner scanner) {
+    private static void printConnectedMenu(Scanner scanner, User user) {
         boolean exitMenu = false;
 
         while (!exitMenu) {
@@ -106,6 +102,7 @@ public class SaleFormation {
             scanner.nextLine();
 
             switch (menuChoice) {
+                case 1 -> chooseClientForOrder(scanner, user);
                 case 2 -> printAllFormations();
                 case 3 -> printFormationsByCategory(scanner);
                 case 4 -> printFormationsByKeyword(scanner);
@@ -114,6 +111,23 @@ public class SaleFormation {
                 default -> System.out.println("Choix invalide, veuillez réessayer.");
             }
         }
+    }
+
+    private static void chooseClientForOrder(Scanner scanner, User user) {
+        ArrayList<Client> clients = clientDao.findByUser(user);
+
+        if (clients.isEmpty()) {
+            System.out.println("Aucun client disponible.");
+            return;
+        }
+
+        System.out.println("\n=== Choisir un client ===");
+        int choice = selectItem(clients, scanner);
+
+        if (choice == -1) return;
+
+        Client selectedClient = clients.get(choice);
+        System.out.println("Client sélectionné : " + selectedClient);
     }
 
     private static void printAllFormations() {
@@ -138,6 +152,7 @@ public class SaleFormation {
         System.out.print("Mot clé : ");
         String keyword = scanner.nextLine();
         ArrayList<Formation> results = formationDao.findByKeyword(keyword);
+
         if (results.isEmpty()) {
             System.out.println("Aucune formation trouvée.");
         } else {
