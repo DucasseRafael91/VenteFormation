@@ -28,11 +28,15 @@ public class SaleFormation {
 
             if (choice.equals("o")) {
                 connectedUser = authenticateUser(scanner);
+
                 if (connectedUser != null) {
                     printConnectedMenu(scanner, connectedUser);
                     break;
+                } else {
+                    handleFailedLogin(scanner);
                 }
-            } else if (choice.equals("n")) {
+            }
+            else if (choice.equals("n")) {
                 printUnconnectedMenu(scanner);
             } else {
                 System.out.println("Choix invalide, veuillez réessayer.");
@@ -60,6 +64,39 @@ public class SaleFormation {
         System.out.println("Login ou mot de passe incorrect.");
         return null;
     }
+
+    private static void handleFailedLogin(Scanner scanner) {
+        System.out.println("\nConnexion échouée.");
+        System.out.println("1. S'inscrire");
+        System.out.println("2. Retour");
+
+        System.out.print("Votre choix : ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+            case 1 -> inscription(scanner);
+            case 2 -> System.out.println("Retour au menu principal.");
+            default -> System.out.println("Choix invalide.");
+        }
+    }
+
+    private static void inscription(Scanner scanner) {
+        System.out.println("\nInscription");
+
+        System.out.print("Login : ");
+        String login = scanner.nextLine();
+
+        System.out.print("Mot de Passe : ");
+        String password = scanner.nextLine();
+
+        User newUser = new User(login, password);
+
+        userDao.create(newUser);
+
+        System.out.println("L'utilisateur à été crée");
+    }
+
 
     private static void printUnconnectedMenu(Scanner scanner) {
         boolean exitMenu = false;
