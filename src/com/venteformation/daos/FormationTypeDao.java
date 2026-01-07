@@ -16,12 +16,12 @@ public class FormationTypeDao implements Dao<Formation_type> {
     private static final String PASSWORD = "";
 
     @Override
-    public void create(Formation_type formation_type) {
+    public void create(Formation_type formationType) {
         // À implémenter plus tard
     }
 
     @Override
-    public void update(Formation_type formation_type) {
+    public void update(Formation_type formationType) {
         // À implémenter plus tard
     }
 
