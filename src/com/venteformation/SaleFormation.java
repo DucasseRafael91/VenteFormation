@@ -3,6 +3,7 @@ package com.venteformation;
 import com.venteformation.daos.*;
 import com.venteformation.Entities.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,6 +14,7 @@ public class SaleFormation {
     private static final FormationTypeDao formationTypeDao = new FormationTypeDao();
     private static final UserDao userDao = new UserDao();
     private static final ClientDao clientDao = new ClientDao();
+    private static final OrderDao orderDao = new OrderDao();
 
     public static void main(String[] ignoredArgs) {
         Scanner scanner = new Scanner(System.in);
@@ -162,6 +164,8 @@ public class SaleFormation {
         for (Formation formation : selectedFormations) {
             System.out.println(formation);
         }
+        Order order = new Order(LocalDateTime.now(),selectedClient);
+        orderDao.create(order);
     }
 
 
