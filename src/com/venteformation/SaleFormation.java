@@ -3,9 +3,11 @@ package com.venteformation;
 import com.venteformation.daos.CategoryDao;
 import com.venteformation.daos.FormationDao;
 import com.venteformation.daos.FormationTypeDao;
+import com.venteformation.daos.UserDao;
 import com.venteformation.Entities.Category;
 import com.venteformation.Entities.Formation;
 import com.venteformation.Entities.Formation_type;
+import com.venteformation.Entities.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,6 +17,7 @@ public class SaleFormation {
     private static final FormationDao formationDao = new FormationDao();
     private static final CategoryDao categoryDao = new CategoryDao();
     private static final FormationTypeDao formationTypeDao = new FormationTypeDao();
+    private static final UserDao userDao = new UserDao();
 
     public static void main(String[] ignoredArgs) {
 
@@ -27,9 +30,10 @@ public class SaleFormation {
             String choice = scanner.next();
 
             if (choice.equals("o")) {
-                printConnectedMenu(scanner);
-                break;
-
+                if (authenticateUser(scanner)) {
+                    printConnectedMenu(scanner);
+                    break;
+                }
             } else if (choice.equals("n")) {
                 printUnconnectedMenu(scanner);
             } else {
@@ -38,6 +42,25 @@ public class SaleFormation {
         }
 
         scanner.close();
+    }
+
+    private static boolean authenticateUser(Scanner scanner) {
+        System.out.print("Login : ");
+        String login = scanner.next();
+
+        System.out.print("Mot de passe : ");
+        String password = scanner.next();
+
+        User user = new User(login, password);
+        User connectedUser = userDao.connexion(user);
+
+        if (connectedUser != null) {
+            System.out.println("Connexion réussie.");
+            return true;
+        }
+
+        System.out.println("Login ou mot de passe incorrect.");
+        return false;
     }
 
     private static void printUnconnectedMenu(Scanner scanner) {
@@ -51,6 +74,7 @@ public class SaleFormation {
             System.out.println("4. Afficher les formations selon leur type");
             System.out.println("5. Retour au menu précédent");
             System.out.print("Votre choix : ");
+
             int menuChoice = scanner.nextInt();
             scanner.nextLine();
 
@@ -77,6 +101,7 @@ public class SaleFormation {
             System.out.println("5. Afficher les formations selon leur type");
             System.out.println("6. Retour au menu précédent");
             System.out.print("Votre choix : ");
+
             int menuChoice = scanner.nextInt();
             scanner.nextLine();
 
@@ -91,51 +116,31 @@ public class SaleFormation {
         }
     }
 
-
     private static void printAllFormations() {
-        System.out.println("Afficher toutes les formations...");
         displayFormations(formationDao.findAll());
     }
 
     private static void printFormationsByCategory(Scanner scanner) {
-        System.out.println("Afficher les formations par catégorie...");
-
         ArrayList<Category> categories = categoryDao.findAll();
         int choice = selectItem(categories, scanner);
-
         if (choice == -1) return;
-
-        Category selectedCategory = categories.get(choice);
-        System.out.println("\nFormations de la catégorie " + selectedCategory.getName() + " :");
-
-        displayFormations(formationDao.findByCategory(selectedCategory));
+        displayFormations(formationDao.findByCategory(categories.get(choice)));
     }
 
     private static void printFormationsByType(Scanner scanner) {
-        System.out.println("Afficher les formations selon leur type");
-
         ArrayList<Formation_type> types = formationTypeDao.findAll();
         int choice = selectItem(types, scanner);
-
         if (choice == -1) return;
-
-        Formation_type selectedType = types.get(choice);
-        System.out.println("\nFormations du type " + selectedType.getName() + " :");
-
-        displayFormations(formationDao.findByType(selectedType));
+        displayFormations(formationDao.findByType(types.get(choice)));
     }
 
     private static void printFormationsByKeyword(Scanner scanner) {
-        System.out.println("Rechercher les formations par mot clé...");
-        System.out.print("Entrez un mot clé : ");
-
+        System.out.print("Mot clé : ");
         String keyword = scanner.nextLine();
         ArrayList<Formation> results = formationDao.findByKeyword(keyword);
-
         if (results.isEmpty()) {
-            System.out.println("Aucune formation trouvée pour le mot clé \"" + keyword + "\".");
+            System.out.println("Aucune formation trouvée.");
         } else {
-            System.out.println("\nFormations contenant le mot clé \"" + keyword + "\" :");
             displayFormations(results);
         }
     }
@@ -151,7 +156,6 @@ public class SaleFormation {
             System.out.println((i + 1) + ". " + items.get(i));
         }
 
-        System.out.print("Votre choix (numéro) : ");
         int choice = scanner.nextInt();
         scanner.nextLine();
 
