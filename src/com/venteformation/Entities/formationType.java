@@ -1,14 +1,13 @@
 package com.venteformation.Entities;
 
-public class Formation_type {
+public class formationType {
 
     private int id;
-    private String name;
+    private final String name;
 
 
     // Constructeur
-    public Formation_type(String name) {
-        this.id = id;
+    public formationType(String name) {
         this.name = name;
     }
 
@@ -24,10 +23,6 @@ public class Formation_type {
     // Setters
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

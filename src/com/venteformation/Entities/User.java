@@ -3,13 +3,12 @@ package com.venteformation.Entities;
 public class User {
 
     private int id;
-    private String login;
-    private String password;
+    private final String login;
+    private final String password;
 
 
     // Constructeur
     public User(String login, String password) {
-        this.id = id;
         this.login = login;
         this.password = password;
     }
@@ -30,14 +29,6 @@ public class User {
     // Setters
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
 }

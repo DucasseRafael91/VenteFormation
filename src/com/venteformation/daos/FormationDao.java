@@ -2,7 +2,7 @@ package com.venteformation.daos;
 
 import com.venteformation.Entities.Category;
 import com.venteformation.Entities.Formation;
-import com.venteformation.Entities.Formation_type;
+import com.venteformation.Entities.formationType;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -100,7 +100,7 @@ public class FormationDao implements Dao<Formation> {
         return formations;
     }
 
-    public ArrayList<Formation> findByType(Formation_type type) {
+    public ArrayList<Formation> findByType(formationType type) {
         ArrayList<Formation> formations = new ArrayList<>();
 
         String sql = """

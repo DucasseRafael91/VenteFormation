@@ -1,6 +1,6 @@
 package com.venteformation.daos;
 
-import com.venteformation.Entities.Formation_type;
+import com.venteformation.Entities.formationType;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,19 +9,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class FormationTypeDao implements Dao<Formation_type> {
+public class FormationTypeDao implements Dao<formationType> {
 
     private static final String URL = "jdbc:mariadb://localhost:3307/formation";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "";
 
     @Override
-    public void create(Formation_type formationType) {
+    public void create(formationType formationType) {
         // À implémenter plus tard
     }
 
     @Override
-    public void update(Formation_type formationType) {
+    public void update(formationType formationType) {
         // À implémenter plus tard
     }
 
@@ -31,14 +31,14 @@ public class FormationTypeDao implements Dao<Formation_type> {
     }
 
     @Override
-    public Formation_type findById(int id) {
+    public formationType findById(int id) {
         // À implémenter plus tard
         return null;
     }
 
     @Override
-    public ArrayList<Formation_type> findAll() {
-        ArrayList<Formation_type> types = new ArrayList<>();
+    public ArrayList<formationType> findAll() {
+        ArrayList<formationType> types = new ArrayList<>();
 
         String sql = "SELECT t_nom FROM v_type_formation";
 
@@ -49,7 +49,7 @@ public class FormationTypeDao implements Dao<Formation_type> {
             while (resultSet.next()) {
                 String name = resultSet.getString(1);
 
-                types.add(new Formation_type(name));
+                types.add(new formationType(name));
             }
 
         } catch (SQLException e) {
