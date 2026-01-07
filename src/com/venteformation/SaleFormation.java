@@ -102,13 +102,31 @@ public class SaleFormation {
                             System.out.println("Afficher les formations selon leur type");
                             ArrayList<Formation_type> types = formationTypeDao.findAll();
 
-                            // Afficher toutes les catégories avec un numéro
                             for (int i = 0; i < types.size(); i++) {
                                 System.out.println((i + 1) + ". " + types.get(i).getName());
                             }
+
+                            System.out.print("Choisissez un type de formation (numéro) : ");
+                            int TypeChoice = scanner.nextInt();
+                            scanner.nextLine(); // consommer le retour à la ligne
+
+                            // Vérifier que le choix est valide
+                            if (TypeChoice < 1 || TypeChoice > types.size()) {
+                                System.out.println("Choix de type invalide.");
+                                break;
+                            }
+
+                            Formation_type selectedType = types.get(TypeChoice - 1);
+                            ArrayList<Formation> formationsByType = formationDao.findByType(selectedType);
+
+                            System.out.println("\nFormations du type " + selectedType.getName() + " :");
+                            for (Formation formation : formationsByType) {
+                                System.out.println(formation);
+                            }
+
                             break;
                         case 5:
-                            exitMenu = true; // revenir au menu principal
+                            exitMenu = true;
                             break;
                         default:
                             System.out.println("Choix invalide, veuillez réessayer.");
