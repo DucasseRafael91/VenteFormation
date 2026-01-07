@@ -2,6 +2,7 @@ package com.venteformation.Daos;
 
 import com.venteformation.Entities.Category;
 import com.venteformation.Entities.Formation;
+import com.venteformation.Entities.Formation_type;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -87,6 +88,45 @@ public class FormationDao implements Dao<Formation> {
                 String description = resultSet.getString("f_description");
                 int days_amount = resultSet.getInt("duree_jours");
                 double price = resultSet.getDouble("prix");
+
+                formations.add(new Formation(name, description, days_amount, price, category));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return formations;
+    }
+
+    public ArrayList<Formation> findByType(Formation_type type) {
+        ArrayList<Formation> formations = new ArrayList<>();
+
+        String sql =
+                "SELECT f_nom, f_description, duree_jours, prix, c_nom \n" +
+                        "FROM `v_formation` \n" +
+                        "INNER JOIN est_de_type\n" +
+                        "ON `f_id` = e_fk_formation \n" +
+                        "INNER JOIN v_type_formation\n" +
+                        "ON t_id = e_fk_type_formation\n" +
+                        "INNER JOIN v_categorie\n" +
+                        "ON v_formation.f_fk_categorie = v_categorie.c_id\n" +
+                        "WHERE t_nom = ?;";
+
+        try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, type.getName());
+
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                String name = resultSet.getString("f_nom");
+                String description = resultSet.getString("f_description");
+                int days_amount = resultSet.getInt("duree_jours");
+                double price = resultSet.getDouble("prix");
+
+                Category category = new Category(resultSet.getString(5));
 
                 formations.add(new Formation(name, description, days_amount, price, category));
             }
