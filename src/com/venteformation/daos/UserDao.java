@@ -13,8 +13,24 @@ public class UserDao implements Dao<User> {
 
     @Override
     public void create(User user) {
-        // À implémenter plus tard
+        String sql = "INSERT INTO v_utilisateur (u_identifiant, u_mot_de_passe) VALUES (?, ?)";
+
+        try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, user.getLogin());
+            ps.setString(2, user.getPassword());
+
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Utilisateur ajouté avec succès !");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @Override
     public void update(User user) {
