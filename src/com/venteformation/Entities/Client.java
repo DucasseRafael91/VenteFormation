@@ -21,6 +21,12 @@ public class Client {
         this.phone_number = phone_number;
         this.User = User;
     }
+    
+    @Override
+    public String toString() {
+        return lastName + " " + firstName + " | Email: " + mail + " | Téléphone: " + phone_number + " | Adresse: " + address;
+    }
+
 
     // Getters
     public int getId() {
