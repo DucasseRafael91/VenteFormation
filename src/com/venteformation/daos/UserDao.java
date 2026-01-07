@@ -40,14 +40,13 @@ public class UserDao implements Dao<User> {
     public ArrayList<User> findAll() {
         ArrayList<User> users = new ArrayList<>();
 
-        String sql = "SELECT * FROM v_utilisateur";
+        String sql = "SELECT u_identifiant, u_mot_de_passe FROM v_utilisateur";
 
         try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                int idUser = resultSet.getInt(1);
                 String login = resultSet.getString(2);
                 String password = resultSet.getString(3);
 
