@@ -4,8 +4,15 @@ import com.venteformation.Entities.Category;
 import com.venteformation.Entities.Formation;
 import com.venteformation.Entities.formationType;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.PreparedStatement;
+
+
 
 public class FormationDao implements Dao<Formation> {
 
@@ -14,26 +21,34 @@ public class FormationDao implements Dao<Formation> {
     private static final String PASSWORD = "";
 
     @Override
-    public void create(Formation user) {
+    public void create(final Formation user) {
         // À implémenter plus tard
     }
 
     @Override
-    public void update(Formation user) {
+    public void update(final Formation user) {
         // À implémenter plus tard
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(final int id) {
         // À implémenter plus tard
     }
 
+    /**
+     * Méthode pour trouver les formations avec l'id
+     * dans la base de données.
+     */
     @Override
-    public Formation findById(int id) {
+    public Formation findById(final int id) {
         // À implémenter plus tard
         return null;
     }
 
+    /**
+     * Méthode pour trouver toutes les formations
+     * dans la base de données.
+     */
     @Override
     public ArrayList<Formation> findAll() {
         ArrayList<Formation> formations = new ArrayList<>();
@@ -51,12 +66,12 @@ public class FormationDao implements Dao<Formation> {
              ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                String name = resultSet.getString(1);
-                String description = resultSet.getString(2);
-                Integer daysAmount = resultSet.getInt(3);
-                Double price = resultSet.getDouble(4);
+                String name = resultSet.getString("f_nom");
+                String description = resultSet.getString("f_description");
+                Integer daysAmount = resultSet.getInt("duree_jours");
+                Double price = resultSet.getDouble("prix");
 
-                Category category = new Category(resultSet.getString(5));
+                Category category = new Category(resultSet.getString("c_nom"));
                 formations.add(new Formation(name, description, daysAmount, price, category));
             }
 
@@ -67,7 +82,13 @@ public class FormationDao implements Dao<Formation> {
         return formations;
     }
 
-    public ArrayList<Formation> findByCategory(Category category) {
+    /**
+     * Méthode pour trouver les formations avec la categorie
+     * dans la base de données.
+     * @param category : categorie
+     * @return retourne les formations par catégorie
+     */
+    public ArrayList<Formation> findByCategory(final Category category) {
         ArrayList<Formation> formations = new ArrayList<>();
 
         String sql = """
@@ -85,10 +106,10 @@ public class FormationDao implements Dao<Formation> {
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
-                String name = resultSet.getString(1);
-                String description = resultSet.getString(2);
-                int daysAmount = resultSet.getInt(3);
-                double price = resultSet.getDouble(4);
+                String name = resultSet.getString("f_nom");
+                String description = resultSet.getString("f_description");
+                int daysAmount = resultSet.getInt("duree_jours");
+                double price = resultSet.getDouble("prix");
 
                 formations.add(new Formation(name, description, daysAmount, price, category));
             }
@@ -100,7 +121,13 @@ public class FormationDao implements Dao<Formation> {
         return formations;
     }
 
-    public ArrayList<Formation> findByType(formationType type) {
+    /**
+     * Méthode pour trouver les formations avec le type
+     * dans la base de données.
+     * @param type : type de la formation
+     * @return retourne les formations par type
+     */
+    public ArrayList<Formation> findByType(final formationType type) {
         ArrayList<Formation> formations = new ArrayList<>();
 
         String sql = """
@@ -130,19 +157,31 @@ public class FormationDao implements Dao<Formation> {
         return formations;
     }
 
-    private void findResult(ArrayList<Formation> formations, ResultSet resultSet) throws SQLException {
+    /**
+     * Méthode pour trouver le résultat
+     * dans la base de données.
+     * @param formations : formations à trouver
+     * @param resultSet : formations à trouver
+     */
+    private void findResult(final ArrayList<Formation> formations, final ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
-            String name = resultSet.getString(1);
-            String description = resultSet.getString(2);
-            int daysAmount = resultSet.getInt(3);
-            double price = resultSet.getDouble(4);
+            String name = resultSet.getString("f_nom");
+            String description = resultSet.getString("f_description");
+            int daysAmount = resultSet.getInt("duree_jours");
+            double price = resultSet.getDouble("prix");
 
-            Category category = new Category(resultSet.getString(5));
+            Category category = new Category(resultSet.getString("c_nom"));
             formations.add(new Formation(name, description, daysAmount, price, category));
         }
     }
 
-    public ArrayList<Formation> findByKeyword(String keyword) {
+    /**
+     * Méthode pour trouver les formations avec un mot clé
+     * dans la base de données.
+     * @param keyword : mot clé
+     * @return retourne les formations par mot clé
+     */
+    public ArrayList<Formation> findByKeyword(final String keyword) {
         ArrayList<Formation> formations = new ArrayList<>();
 
         String sql = """
