@@ -22,8 +22,6 @@ public class OrderDao implements Dao<Order> {
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setInt(1, order.getClient().getId());
-
-            int row = ps.executeUpdate();
             
         } catch (SQLException e) {
             e.printStackTrace();
