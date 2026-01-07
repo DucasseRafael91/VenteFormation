@@ -102,7 +102,7 @@ public class SaleFormation {
             scanner.nextLine();
 
             switch (menuChoice) {
-                case 1 -> chooseClientForOrder(scanner, user);
+                case 1 -> passOrder(scanner, user);
                 case 2 -> printAllFormations();
                 case 3 -> printFormationsByCategory(scanner);
                 case 4 -> printFormationsByKeyword(scanner);
@@ -113,7 +113,7 @@ public class SaleFormation {
         }
     }
 
-    private static void chooseClientForOrder(Scanner scanner, User user) {
+    private static void passOrder(Scanner scanner, User user) {
         ArrayList<Client> clients = clientDao.findByUser(user);
 
         if (clients.isEmpty()) {
@@ -122,13 +122,48 @@ public class SaleFormation {
         }
 
         System.out.println("\n=== Choisir un client ===");
-        int choice = selectItem(clients, scanner);
+        int clientChoice = selectItem(clients, scanner);
 
-        if (choice == -1) return;
+        if (clientChoice == -1) return;
 
-        Client selectedClient = clients.get(choice);
-        System.out.println("Client sélectionné : " + selectedClient);
+        Client selectedClient = clients.get(clientChoice);
+        System.out.println("Client sélectionné : " + selectedClient + "\n");
+
+        ArrayList<Formation> allFormations = formationDao.findAll();
+        ArrayList<Formation> selectedFormations = new ArrayList<>();
+
+        boolean continueSelection = true;
+        while (continueSelection) {
+            System.out.println("\n=== Choisissez une formation (0 pour terminer) ===");
+            for (int i = 0; i < allFormations.size(); i++) {
+                System.out.println((i + 1) + ". " + allFormations.get(i));
+            }
+
+            System.out.print("Votre choix : ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (choice == 0) {
+                continueSelection = false;
+            } else if (choice < 0 || choice > allFormations.size()) {
+                System.out.println("Choix invalide.");
+            } else {
+                Formation selectedFormation = allFormations.get(choice - 1);
+                if (!selectedFormations.contains(selectedFormation)) {
+                    selectedFormations.add(selectedFormation);
+                    System.out.println("Formation ajoutée : " + selectedFormation);
+                } else {
+                    System.out.println("Formation déjà sélectionnée.");
+                }
+            }
+        }
+
+        System.out.println("\n=== Formations commandées pour " + selectedClient + " ===");
+        for (Formation formation : selectedFormations) {
+            System.out.println(formation);
+        }
     }
+
 
     private static void printAllFormations() {
         displayFormations(formationDao.findAll());
