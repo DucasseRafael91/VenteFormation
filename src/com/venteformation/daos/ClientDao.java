@@ -35,7 +35,7 @@ public class ClientDao implements Dao<Client> {
 
     @Override
     public ArrayList<Client> findAll() {
-        return null;
+        return new ArrayList<>();
     }
 
     public ArrayList<Client> findByUser(User user) {
