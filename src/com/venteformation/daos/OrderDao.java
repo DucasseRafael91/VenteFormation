@@ -1,12 +1,9 @@
 package com.venteformation.daos;
 
-import com.venteformation.Entities.Client;
+
 import com.venteformation.Entities.Formation;
 import com.venteformation.Entities.Order;
-import com.venteformation.Entities.User;
-
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class OrderDao implements Dao<Order> {
@@ -68,7 +65,7 @@ public class OrderDao implements Dao<Order> {
 
     @Override
     public void create(Order obj) {
-
+        //à implémenter plus tard
     }
 
     @Override
@@ -89,7 +86,7 @@ public class OrderDao implements Dao<Order> {
 
     @Override
     public ArrayList<Order> findAll() {
-        return null;
+        return new ArrayList<>();
     }
 
 
