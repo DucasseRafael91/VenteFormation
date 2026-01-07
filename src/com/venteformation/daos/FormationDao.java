@@ -1,4 +1,4 @@
-package com.venteformation.Daos;
+package com.venteformation.daos;
 
 import com.venteformation.Entities.Category;
 import com.venteformation.Entities.Formation;

@@ -1,4 +1,4 @@
-package com.venteformation.Daos;
+package com.venteformation.daos;
 
 import java.util.List;
 

@@ -1,28 +1,27 @@
-package com.venteformation.Daos;
+package com.venteformation.daos;
 
-import com.venteformation.Entities.User;
+import com.venteformation.Entities.Category;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class UserDao implements Dao<User> {
+public class CategoryDao implements Dao<Category> {
 
     private static final String URL = "jdbc:mariadb://localhost:3307/formation";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "";
 
     @Override
-    public void create(User user) {
+    public void create(Category category) {
         // À implémenter plus tard
     }
 
     @Override
-    public void update(User user) {
+    public void update(Category category) {
         // À implémenter plus tard
     }
 
@@ -32,34 +31,33 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public User findById(int id) {
+    public Category findById(int id) {
         // À implémenter plus tard
         return null;
     }
 
     @Override
-    public ArrayList<User> findAll() {
-        ArrayList<User> users = new ArrayList<>();
+    public ArrayList<Category> findAll() {
+        ArrayList<Category> categories = new ArrayList<>();
 
-        String sql = "SELECT * FROM v_utilisateur";
+        String sql = "SELECT c_nom FROM v_categorie";
 
         try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                int idUser = resultSet.getInt(1);
-                String login = resultSet.getString(2);
-                String password = resultSet.getString(3);
+                String name = resultSet.getString(1);
 
-                users.add(new User(login, password));
+                categories.add(new Category(name));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return users;
+        return categories;
     }
 
 }
+

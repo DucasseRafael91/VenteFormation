@@ -1,11 +1,9 @@
-package com.venteformation.Daos;
+package com.venteformation.daos;
 
 import com.venteformation.Entities.Formation_type;
-import com.venteformation.Entities.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

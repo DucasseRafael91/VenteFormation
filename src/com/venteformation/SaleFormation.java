@@ -1,8 +1,8 @@
 package com.venteformation;
 
-import com.venteformation.Daos.CategoryDao;
-import com.venteformation.Daos.FormationDao;
-import com.venteformation.Daos.FormationTypeDao;
+import com.venteformation.daos.CategoryDao;
+import com.venteformation.daos.FormationDao;
+import com.venteformation.daos.FormationTypeDao;
 import com.venteformation.Entities.Category;
 import com.venteformation.Entities.Formation;
 import com.venteformation.Entities.Formation_type;
