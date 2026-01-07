@@ -2,11 +2,7 @@ package com.venteformation.daos;
 
 import com.venteformation.Entities.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class UserDao implements Dao<User> {
@@ -59,5 +55,36 @@ public class UserDao implements Dao<User> {
 
         return users;
     }
+
+    public User connexion(User user) {
+
+        String sql = """
+        SELECT u_identifiant, u_mot_de_passe
+        FROM v_utilisateur
+        WHERE u_identifiant = ? AND u_mot_de_passe = ?
+        """;
+
+        try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return new User(
+                        resultSet.getString("u_identifiant"),
+                        resultSet.getString("u_mot_de_passe")
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 
 }
