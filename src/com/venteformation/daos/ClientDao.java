@@ -42,7 +42,7 @@ public class ClientDao implements Dao<Client> {
         ArrayList<Client> clients = new ArrayList<>();
 
         String sql =
-                "SELECT c_nom, c_prenom, c_email, c_adresse, c_telephone " +
+                "SELECT c_nom, c_prenom, c_email, c_adresse, c_telephone, c_id " +
                         "FROM v_client " +
                         "INNER JOIN v_utilisateur ON c_fk_utilisateur = u_id " +
                         "WHERE u_identifiant = ?";
@@ -59,8 +59,10 @@ public class ClientDao implements Dao<Client> {
                     String mail = resultSet.getString(3);
                     String address = resultSet.getString(4);
                     String phone = resultSet.getString(5);
+                    Integer id = resultSet.getInt(6);
 
                     clients.add(new Client(
+                            id,
                             lastName,
                             firstName,
                             mail,
