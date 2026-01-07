@@ -1,7 +1,6 @@
 package com.venteformation.daos;
 
 import com.venteformation.Entities.Category;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,31 +10,45 @@ import java.util.ArrayList;
 
 public class CategoryDao implements Dao<Category> {
 
+    /**
+     * DAO permettant la gestion des catégories
+     * dans la base de données.
+     */
+
     private static final String URL = "jdbc:mariadb://localhost:3307/formation";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "";
 
     @Override
-    public void create(Category category) {
+    public void create(final Category category) {
         // À implémenter plus tard
     }
 
     @Override
-    public void update(Category category) {
+    public void update(final Category category) {
         // À implémenter plus tard
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(final int id) {
         // À implémenter plus tard
     }
 
+    /**
+     * Méthode pour trouver une categorie par id
+     * dans la base de données.
+     */
     @Override
-    public Category findById(int id) {
+    public Category findById(final int id) {
         // À implémenter plus tard
         return null;
     }
 
+
+    /**
+     * Méthode pour trouver toute les categories
+     * dans la base de données.
+     */
     @Override
     public ArrayList<Category> findAll() {
         ArrayList<Category> categories = new ArrayList<>();
@@ -48,7 +61,6 @@ public class CategoryDao implements Dao<Category> {
 
             while (resultSet.next()) {
                 String name = resultSet.getString(1);
-
                 categories.add(new Category(name));
             }
 
@@ -58,6 +70,4 @@ public class CategoryDao implements Dao<Category> {
 
         return categories;
     }
-
 }
-
