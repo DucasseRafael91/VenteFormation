@@ -39,7 +39,6 @@ public class Client {
     return id;
   }
 
-
   // Setters
   public void setId(int id) {
     this.id = id;
