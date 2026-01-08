@@ -9,7 +9,6 @@ public class Formation {
   private final Category category;
   private int id;
 
-
   // Constructeur
   public Formation(String name, String description, Integer daysAmount, Double price,
       Category category) {
@@ -24,10 +23,14 @@ public class Formation {
   @Override
   public String toString() {
     return
-        "Nom: " + name + "description: " + description +
-            " | Durée: " + daysAmount + " jours" +
-            " | Prix: " + price + " €" +
-            " | Catégorie: " + category;
+        "Nom: " + name + "description: "
+            + description
+            + " | Durée: " + daysAmount
+            + " jours"
+            + " | Prix: "
+            + price
+            + " €"
+            + " | Catégorie: " + category;
   }
 
   // Getters

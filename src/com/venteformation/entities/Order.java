@@ -8,7 +8,6 @@ public class Order {
   private final Client client;
   private int id;
 
-
   // Constructeur
   public Order(LocalDateTime date, Client client) {
     this.client = client;
@@ -28,6 +27,5 @@ public class Order {
   public Client getClient() {
     return client;
   }
-
 
 }

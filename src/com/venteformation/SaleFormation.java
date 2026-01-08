@@ -218,7 +218,7 @@ public class SaleFormation {
     }
 
     private static void printFormationsByType(Scanner scanner) {
-        ArrayList<formationType> types = formationTypeDao.findAll();
+        ArrayList<FormationType> types = formationTypeDao.findAll();
         int choice = selectItem(types, scanner);
         if (choice == -1) return;
         displayFormations(formationDao.findByType(types.get(choice)));

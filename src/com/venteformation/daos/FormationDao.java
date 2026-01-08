@@ -2,7 +2,7 @@ package com.venteformation.daos;
 
 import com.venteformation.entities.Category;
 import com.venteformation.entities.Formation;
-import com.venteformation.entities.formationType;
+import com.venteformation.entities.FormationType;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -127,7 +127,7 @@ public class FormationDao implements Dao<Formation> {
      * @param type : type de la formation
      * @return retourne les formations par type
      */
-    public ArrayList<Formation> findByType(final formationType type) {
+    public ArrayList<Formation> findByType(final FormationType type) {
         ArrayList<Formation> formations = new ArrayList<>();
 
         String sql = """

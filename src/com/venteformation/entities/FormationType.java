@@ -1,13 +1,12 @@
 package com.venteformation.entities;
 
-public class formationType {
+public class FormationType {
 
   private final String name;
   private int id;
 
-
   // Constructeur
-  public formationType(String name) {
+  public FormationType(String name) {
     this.name = name;
   }
 

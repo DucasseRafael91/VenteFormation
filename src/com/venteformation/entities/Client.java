@@ -10,7 +10,6 @@ public class Client {
   private final User user;
   private int id;
 
-
   // Constructeur
   public Client(final Integer id, final String lastName, final String firstName, final String mail,
       final String address, final String phoneNumber, final User user) {
@@ -29,12 +28,10 @@ public class Client {
         + " | Adresse: " + address;
   }
 
-
   // Getters
   public int getId() {
     return id;
   }
-
 
   // Setters
   public void setId(int id) {

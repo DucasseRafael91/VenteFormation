@@ -2,10 +2,8 @@ package com.venteformation.entities;
 
 public class Category {
 
-
   private final String name;
   private int id;
-
 
   // Constructeur
   public Category(final String name) {
