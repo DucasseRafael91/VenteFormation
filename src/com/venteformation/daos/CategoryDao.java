@@ -65,7 +65,7 @@ public class CategoryDao implements Dao<Category> {
       }
 
     } catch (SQLException e) {
-      e.printStackTrace();
+     System.out.println("Erreur dans la requête SQL");
     }
 
     return categories;
