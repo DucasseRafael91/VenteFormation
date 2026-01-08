@@ -30,6 +30,7 @@ public class Formation {
   public String toString() {
     return
         "Nom: " + name + "description: "
+            + " "
             + description
             + " | Durée: " + daysAmount
             + " jours"
