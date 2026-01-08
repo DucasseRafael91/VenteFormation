@@ -2,34 +2,34 @@ package com.venteformation.Entities;
 
 public class User {
 
-    private int id;
-    private final String login;
-    private final String password;
+  private final String login;
+  private final String password;
+  private int id;
 
 
-    // Constructeur
-    public User(String login, String password) {
-        this.login = login;
-        this.password = password;
-    }
+  // Constructeur
+  public User(String login, String password) {
+    this.login = login;
+    this.password = password;
+  }
 
-    // Getters
-    public int getId() {
-        return id;
-    }
+  // Getters
+  public int getId() {
+    return id;
+  }
 
-    public String getLogin() {
-        return login;
-    }
+  // Setters
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getLogin() {
+    return login;
+  }
 
-    // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
+  public String getPassword() {
+    return password;
+  }
 
 }
 

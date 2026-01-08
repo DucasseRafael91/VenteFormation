@@ -2,27 +2,27 @@ package com.venteformation.Entities;
 
 public class formationType {
 
-    private int id;
-    private final String name;
+  private final String name;
+  private int id;
 
 
-    // Constructeur
-    public formationType(String name) {
-        this.name = name;
-    }
+  // Constructeur
+  public formationType(String name) {
+    this.name = name;
+  }
 
-    // Getters
-    public int getId() {
-        return id;
-    }
+  // Getters
+  public int getId() {
+    return id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  // Setters
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
+  public String getName() {
+    return name;
+  }
 
 }
