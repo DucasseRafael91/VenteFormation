@@ -12,7 +12,7 @@ public class Client {
 
 
     // Constructeur
-    public Client(Integer id, String lastName, String firstName, String mail, String address, String phoneNumber, User user) {
+    public Client(final Integer id, final String lastName, final String firstName, final String mail, final String address, final String phoneNumber, final User user) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
