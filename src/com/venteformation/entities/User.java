@@ -1,5 +1,8 @@
 package com.venteformation.entities;
 
+/**
+ * Entité User.
+ */
 public class User {
 
   private final String login;
@@ -7,6 +10,9 @@ public class User {
   private int id;
 
   // Constructeur
+  /**
+   * Constructeur de User.
+   */
   public User(String login, String password) {
     this.login = login;
     this.password = password;

@@ -1,11 +1,17 @@
 package com.venteformation.entities;
 
+/**
+ * Entité Category.
+ */
 public class Category {
 
   private final String name;
   private int id;
 
   // Constructeur
+  /**
+   * Constructeur de Category.
+   */
   public Category(final String name) {
     this.name = name;
   }

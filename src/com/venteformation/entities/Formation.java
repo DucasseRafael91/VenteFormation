@@ -1,5 +1,8 @@
 package com.venteformation.entities;
 
+/**
+ * Entité Formation.
+ */
 public class Formation {
 
   private final String name;
@@ -10,6 +13,9 @@ public class Formation {
   private int id;
 
   // Constructeur
+  /**
+   * Constructeur de Formation.
+   */
   public Formation(String name, String description, Integer daysAmount, Double price,
       Category category) {
     this.name = name;

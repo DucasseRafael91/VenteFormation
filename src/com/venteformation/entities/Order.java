@@ -2,6 +2,9 @@ package com.venteformation.entities;
 
 import java.time.LocalDateTime;
 
+/**
+ * Entité Order.
+ */
 public class Order {
 
   private final LocalDateTime date;
@@ -9,6 +12,9 @@ public class Order {
   private int id;
 
   // Constructeur
+  /**
+   * Constructeur de Order.
+   */
   public Order(LocalDateTime date, Client client) {
     this.client = client;
     this.date = date;

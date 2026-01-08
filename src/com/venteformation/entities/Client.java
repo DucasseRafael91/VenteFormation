@@ -1,5 +1,8 @@
 package com.venteformation.entities;
 
+/**
+ * Entité Client.
+ */
 public class Client {
 
   private final String lastName;
@@ -11,6 +14,9 @@ public class Client {
   private int id;
 
   // Constructeur
+  /**
+   * Constructeur de Client.
+   */
   public Client(final Integer id, final String lastName, final String firstName, final String mail,
       final String address, final String phoneNumber, final User user) {
     this.id = id;
