@@ -1,11 +1,10 @@
-package com.venteformation.Entities;
+package com.venteformation.entities;
 
 public class User {
 
   private final String login;
   private final String password;
   private int id;
-
 
   // Constructeur
   public User(String login, String password) {

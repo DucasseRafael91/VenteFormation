@@ -1,6 +1,6 @@
 package com.venteformation.daos;
 
-import com.venteformation.Entities.Category;
+import com.venteformation.entities.Category;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

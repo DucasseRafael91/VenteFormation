@@ -1,6 +1,6 @@
 package com.venteformation.daos;
 
-import com.venteformation.Entities.User;
+import com.venteformation.entities.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

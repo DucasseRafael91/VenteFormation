@@ -1,7 +1,7 @@
 package com.venteformation;
 
 import com.venteformation.daos.*;
-import com.venteformation.Entities.*;
+import com.venteformation.entities.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

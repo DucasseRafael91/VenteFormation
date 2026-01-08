@@ -1,8 +1,8 @@
 package com.venteformation.daos;
 
-import com.venteformation.Entities.Category;
-import com.venteformation.Entities.Formation;
-import com.venteformation.Entities.formationType;
+import com.venteformation.entities.Category;
+import com.venteformation.entities.Formation;
+import com.venteformation.entities.formationType;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
