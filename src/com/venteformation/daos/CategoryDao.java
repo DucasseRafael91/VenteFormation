@@ -16,8 +16,8 @@ public class CategoryDao implements Dao<Category> {
      */
 
     private static final String URL = "jdbc:mariadb://localhost:3307/formation";
-    private static final String LOGIN = "root";
-    private static final String PASSWORD = "";
+    private static final String LOGIN = "formation";
+    private static final String PASSWORD = "formation";
 
     @Override
     public void create(final Category category) {
