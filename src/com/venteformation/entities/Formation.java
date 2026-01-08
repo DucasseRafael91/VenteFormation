@@ -29,8 +29,7 @@ public class Formation {
   @Override
   public String toString() {
     return
-        "Nom: " + name + "description: "
-            + " "
+        "Nom: " + name + " description: "
             + description
             + " | Durée: " + daysAmount
             + " jours"
