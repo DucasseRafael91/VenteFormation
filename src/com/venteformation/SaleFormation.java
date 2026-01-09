@@ -127,7 +127,7 @@ public class SaleFormation {
       scanner.nextLine();
 
       switch (menuChoice) {
-        case 1 -> printAllFormations();
+        case 1 -> displayFormations(formationDao.findAll());
         case 2 -> printFormationsByCategory(scanner);
         case 3 -> printFormationsByKeyword(scanner);
         case 4 -> printFormationsByType(scanner);
@@ -155,7 +155,7 @@ public class SaleFormation {
 
       switch (menuChoice) {
         case 1 -> passOrder(scanner, user);
-        case 2 -> printAllFormations();
+        case 2 -> displayFormations(formationDao.findAll());
         case 3 -> printFormationsByCategory(scanner);
         case 4 -> printFormationsByKeyword(scanner);
         case 5 -> printFormationsByType(scanner);
@@ -212,16 +212,12 @@ public class SaleFormation {
       }
     }
 
-    System.out.println("\n=== Formations commandées pour " + selectedClient + " ===");
+    System.out.println("\n=== Formations commandées pour " + selectedClient.getFirstName() + " " + selectedClient.getLastName() + " " + " ===");
     for (Formation formation : selectedFormations) {
       System.out.println(formation);
     }
     Order order = new Order(LocalDateTime.now(), selectedClient);
     orderDao.create(order, selectedFormations);
-  }
-
-  private static void printAllFormations() {
-    displayFormations(formationDao.findAll());
   }
 
   private static void printFormationsByCategory(Scanner scanner) {
@@ -237,7 +233,7 @@ public class SaleFormation {
     ArrayList<FormationType> types = formationTypeDao.findAll();
     int choice = selectItem(types, scanner);
     if (choice == -1) {
-      return;
+      return ;
     }
 
     displayFormations(formationDao.findByType(types.get(choice)));

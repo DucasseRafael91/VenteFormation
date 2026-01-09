@@ -39,6 +39,14 @@ public class Client {
     return id;
   }
 
+  public String getLastName() {
+    return lastName;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
   // Setters
   public void setId(int id) {
     this.id = id;
